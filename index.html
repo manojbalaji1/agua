@@ -17,183 +17,8 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
   <link href="css/load.css" rel="stylesheet">
-  
-<script type="text/javascript" src="js/fusioncharts.js"></script>
-<script type="text/javascript" src="js/fusioncharts.theme.fint.js?cacheBust=56"></script>
-<script type="text/javascript">
-  FusionCharts.ready(function(){
-    var fusioncharts = new FusionCharts({
-    type: 'cylinder',
-    dataFormat: 'json',
-    id: 'fuelMeter-1',
-    renderAt: 'chart-container',
-    width: '200',
-    height: '350',
-    dataSource: {
-        "chart": {
-            "theme": "fint",
-            "caption": "Normal Water Level",
-            "subcaption": " ",
-            "lowerLimit": "0",
-            "upperLimit": "120",
-            "lowerLimitDisplay": "Empty",
-            "upperLimitDisplay": "Full",
-            "numberSuffix": " ltrs",
-            "showValue": "1",
-            "chartBottomMargin": "45",
-            "showValue": "0",
-                    },
-        "value": "110",
-        "annotations": {
-            "origw": "400",
-            "origh": "190",
-            "autoscale": "1",
-            "groups": [{
-                "id": "range",
-                "items": [{
-                    "id": "rangeBg",
-                    "type": "rectangle",
-                    "x": "$canvasCenterX-45",
-                    "y": "$chartEndY-30",
-                    "tox": "$canvasCenterX +45",
-                    "toy": "$chartEndY-75",
-                    "fillcolor": "#6caa03"
-                }, {
-                    "id": "rangeText",
-                    "type": "Text",
-                    "fontSize": "11",
-                    "fillcolor": "#333333",
-                    "text": "80 ltrs",
-                    "x": "$chartCenterX-45",
-                    "y": "$chartEndY-50"
-                }]
-            }]
-        }
 
-    },
-    "events": {
-        "rendered": function(evtObj, argObj) {
-            var fuelVolume = 110;
-            evtObj.sender.chartInterval = setInterval(function() {
-                (fuelVolume < 10) ? (fuelVolume = 80) : "";
-                var consVolume = fuelVolume - (Math.floor(Math.random() * 3));
-                evtObj.sender.feedData("&value=" + consVolume);
-                fuelVolume = consVolume;
-            }, 1000);
-        },
-        //Using real time update event to update the annotation
-        //showing available volume of Diesel
-        "realTimeUpdateComplete": function(evt, arg) {
-            var annotations = evt.sender.annotations,
-                dataVal = evt.sender.getData(),
-                colorVal = (dataVal >= 70) ? "#6caa03" : ((dataVal <= 35) ? "#e44b02" : "#f8bd1b");
-            //Updating value
-            annotations && annotations.update('rangeText', {
-                "text": dataVal + " ltrs"
-            });
-            //Changing background color as per value
-            annotations && annotations.update('rangeBg', {
-                "fillcolor": colorVal
-            });
 
-        },
-        "disposed": function(evt, arg) {
-            clearInterval(evt.sender.chartInterval);
-        }
-    }
-}
-);
-    fusioncharts.render();
-});
-</script>
-<script type="text/javascript">
-  FusionCharts.ready(function(){
-    var fusioncharts = new FusionCharts({
-    type: 'cylinder',
-    dataFormat: 'json',
-    id: 'fuelMeter-1',
-    renderAt: 'chart-container2',
-    width: '200',
-    height: '350',
-    
-    dataSource: {
-        "chart": {
-            "theme": "fint",
-            "caption": "Grey Water Level",
-            "subcaption": " ",
-            "lowerLimit": "0",
-            "upperLimit": "120",
-            "lowerLimitDisplay": "Empty",
-            "upperLimitDisplay": "Full",
-            "numberSuffix": " ltrs",
-            "showValue": "1",
-            "chartBottomMargin": "45",
-            "showValue": "0",
-            "cylFillColor": "#121212"
-        },
-        "value": "110",
-        "annotations": {
-            "origw": "400",
-            "origh": "190",
-            "autoscale": "1",
-            "groups": [{
-                "id": "range",
-                "items": [{
-                    "id": "rangeBg",
-                    "type": "rectangle",
-                    "x": "$canvasCenterX-45",
-                    "y": "$chartEndY-30",
-                    "tox": "$canvasCenterX +45",
-                    "toy": "$chartEndY-75",
-                    "fillcolor": "#6caa03"
-                }, {
-                    "id": "rangeText",
-                    "type": "Text",
-                    "fontSize": "11",
-                    "fillcolor": "#333333",
-                    "text": "80 ltrs",
-                    "x": "$chartCenterX-45",
-                    "y": "$chartEndY-50"
-                }]
-            }]
-        }
-
-    },
-    "events": {
-        "rendered": function(evtObj, argObj) {
-            var fuelVolume = 110;
-            evtObj.sender.chartInterval = setInterval(function() {
-                (fuelVolume < 10) ? (fuelVolume = 80) : "";
-                var consVolume = fuelVolume - (Math.floor(Math.random() * 3));
-                evtObj.sender.feedData("&value=" + consVolume);
-                fuelVolume = consVolume;
-            }, 1000);
-        },
-        //Using real time update event to update the annotation
-        //showing available volume of Diesel
-        "realTimeUpdateComplete": function(evt, arg) {
-            var annotations = evt.sender.annotations,
-                dataVal = evt.sender.getData(),
-                colorVal = (dataVal >= 70) ? "#6caa03" : ((dataVal <= 35) ? "#e44b02" : "#f8bd1b");
-            //Updating value
-            annotations && annotations.update('rangeText', {
-                "text": dataVal + " ltrs"
-            });
-            //Changing background color as per value
-            annotations && annotations.update('rangeBg', {
-                "fillcolor": colorVal
-            });
-
-        },
-        "disposed": function(evt, arg) {
-            clearInterval(evt.sender.chartInterval);
-        }
-    }
-}
-);
-    fusioncharts.render();
-});
-</script>
 <style type="text/css">
   nav li{
     background-color: black !important;
@@ -202,17 +27,19 @@
 </head>
 
 <body class="sticky-footer hide" id="page-top" style="background-color: black;" >
-	
+<script>
+setTimeout("window.open('home.html','_self')", 5000);
+</script>
 	<div class="container-fluid text-center loaded" style="background-color: black;z-index: 999999; min-height: 112.5vh; position: fixed;display: flex;justify-content: center;align-items: center;">
-		<figure>
+		<figure >
 			<h2 class="loading" style="color: #81D4FA;" >AGUA</h2>
 		<img alt="droplet" src="agua logo.png" style="height: 230px;width: 230px" class="loading">
 		<div><h5 class="typewriter" style="margin-bottom: 10px;">Loading..</h5></div>
   </figure>
-		
+
 	</div>
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark " id="mainNav" style="background-color: black;"> 
+  <!-- Navigation
+  <nav class="navbar navbar-expand-lg navbar-dark " id="mainNav" style="background-color: black;">
     <a class="navbar-brand" href="index.html">AGUA
     	<img src="agua logo.png" style="width: 30px;height: 30px;margin-top:-5px;"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -226,8 +53,8 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
-        
-      
+
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-sitemap"></i>
@@ -240,7 +67,7 @@
                 <li>
                   <a href="tables.html" onClick="event.stopPropagation();">Table</a>
                 </li>
-                
+
               </ul>
             </li>
 
@@ -250,13 +77,13 @@
                 <li>
                   <a href="charts.html">Charts</a>
                 </li>
-                
+
               </ul>
             </li>
-          
+
           </ul>
         </li>
-        
+
       </ul>
         <ul class="navbar-nav sidenav-toggler" style="background-color: #111133;">
         <li class="nav-item">
@@ -269,13 +96,14 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
+
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="index.html">AGUA</a>
         </li>
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
+    -->
       <!-- Icon Cards-->
     <!--  <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
@@ -343,20 +171,20 @@
           </div>
         </div>
       </div> -->
-      
 
-      
-<!-- Tank Chart-->
+
+
+<!--
       <div class="card mb-3">
         <div class="card-header">
           <i></i> Tanks</div>
         <div class="card-body">
           <div class="row">
-        <div class="col-lg-6 text-center">        
+        <div class="col-lg-6 text-center">
           <div id="chart-container">FusionCharts XT will load here!</div>
           <div class="text-center"><button id="nwb" class="btn btn-danger" onclick="togglenw();">Pump Off&nbsp</button></div>
           </div>
-          
+
           <div class="col-lg-6 text-center" >
           <div id="chart-container2">FusionCharts XT will load here!</div>
           <div class="text-center"><button id="gwb" class="btn btn-danger"  onclick="togglegw();">Pump Off&nbsp</button></div>
@@ -388,25 +216,30 @@
             }
           </script>
           </div>
-          
+
       </div>
         </div>
       </div>
-      <!-- Tank Chart -->
-      
-     
+     Tank Chart -->
+
+
     </div>
     <!-- /.container-fluid-->
+
+
+
+
+
     <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
+    <!--<footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
           <small>Copyright © TechAgua 2017 | Powered by Infillence</small>
         </div>
       </div>
     </footer>
-    
-  
+-->
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
